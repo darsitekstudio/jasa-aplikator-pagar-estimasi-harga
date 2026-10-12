@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DJ3 Engineering — Estimasi Harga Pagar Minimalis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f3;--panel:#fff;--ink:#14212b;--mute:#586873;--line:#cdd5db;--steel:#14212b;--amber:#f2a900;--on-steel:#eef1f3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e161d;--panel:#16222c;--ink:#e8edf0;--mute:#97a6b0;--line:#2a3945;--steel:#0a1117;--on-steel:#e8edf0}}
+:root[data-theme="dark"]{--bg:#0e161d;--panel:#16222c;--ink:#e8edf0;--mute:#97a6b0;--line:#2a3945;--steel:#0a1117;--on-steel:#e8edf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Barlow,system-ui,sans-serif}
+h1,h2,.num{font-family:"Barlow Condensed","Arial Narrow",sans-serif;letter-spacing:.01em}
+header{background:var(--steel);color:var(--on-steel)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:700 26px "Barlow Condensed",sans-serif;display:flex;gap:8px;align-items:center}
+.logo i{background:var(--amber);color:#14212b;font-style:normal;padding:0 8px;border-radius:3px}
+nav a.wa{color:var(--on-steel);text-decoration:none;border:1px solid #ffffff55;padding:8px 14px;border-radius:4px;font-weight:600;font-size:14px}
+.hero{padding:28px 0 0}
+h1{font-size:clamp(36px,7vw,64px);line-height:1;margin:0 0 12px;max-width:14ch}
+.hero p{max-width:52ch;color:#b9c5cd;margin:0 0 24px}
+#fence{display:block;width:100%;height:auto;max-height:230px}
+main{padding:32px 0 56px}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px}
+h2{font-size:30px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 18px;font-size:15px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+select,input{width:100%;padding:11px 12px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:5px}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.unit{position:relative}.unit span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
+button{margin-top:20px;width:100%;padding:14px;font:700 20px "Barlow Condensed",sans-serif;letter-spacing:.03em;background:var(--amber);color:#14212b;border:0;border-radius:5px;cursor:pointer}
+button:hover{filter:brightness(1.06)}
+.res .total{font:700 clamp(30px,5vw,42px)/1.1 "Barlow Condensed",sans-serif;margin:6px 0 2px}
+.res .empty{color:var(--mute)}
+.res ul{list-style:none;padding:0;margin:16px 0;border-top:1px solid var(--line)}
+.res li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.note{font-size:13px;color:var(--mute)}
+a.cta{display:block;text-align:center;margin-top:14px;padding:13px;background:var(--steel);color:var(--on-steel);border-radius:5px;text-decoration:none;font-weight:600}
+a.cta[hidden]{display:none}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--mute);font-size:14px}
+.hero{padding-bottom:20px}
+.tog{width:auto;margin:12px 0 0;padding:8px 18px;font-size:17px;background:transparent;color:var(--on-steel);border:1px solid #ffffff77}
+.tog[hidden]{display:none}
+.mv{transition:transform .9s ease}
+@media(prefers-reduced-motion:reduce){.mv{transition:none}}
+.sx{fill:none;stroke:var(--ink);stroke-width:4}.sx.on{stroke:var(--amber)}.sx.k{stroke:var(--mute);stroke-width:3}
+.tx{fill:var(--ink);font:13px Barlow,sans-serif}.tx.m{fill:var(--mute);font-size:11px}
+#c3d{display:block;width:100%;height:clamp(260px,50vw,430px);touch-action:none;cursor:grab}.stage{border-radius:8px;overflow:hidden}#nogl{padding:40px;color:#b9c5cd}.hint{font-size:13px;color:#b9c5cd;margin:10px 0 0;max-width:70ch}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <nav><div class="logo"><i>DJ3</i>Engineering</div><a class="wa" id="waTop" href="#">Konsultasi WhatsApp</a></nav>
+  <div class="hero">
+   <h1>Hitung sendiri harga pagar minimalis Anda.</h1>
+   <p>Isi ukuran dan jenis pagar, lihat perkiraan biayanya langsung. Gambar di bawah ikut berubah sesuai ukuran yang Anda masukkan.</p>
+   <div class="stage"><canvas id="c3d" role="img" aria-label="Visual 3D pagar, geser untuk memutar"></canvas><p id="nogl" hidden>Tampilan 3D tidak didukung di browser ini.</p></div>
+   <button id="tog" class="tog" type="button" hidden>Buka gerbang</button>
+   <p class="hint">Geser untuk memutar, scroll untuk zoom. Ukuran rangka, kisi 2×4, dan jarak rong digambar sesuai skala asli; pagar ditampilkan maksimal 4 m agar detailnya terlihat.</p>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+ <div class="grid">
+  <section class="card" aria-labelledby="t1">
+   <h2 id="t1">Kalkulator estimasi</h2>
+   <p class="sub">Harga untuk pagar minimalis dengan rangka besi hollow.</p>
+   <div class="row">
+    <div><label for="mat">Ukuran rangka hollow</label><select id="mat"></select></div>
+    <div><label for="sp">Jarak rong (kisi 2×4)</label><select id="sp"></select></div>
+   </div>
+   <div class="row">
+    <div><label for="len">Panjang pagar</label><div class="unit"><input id="len" type="number" min="1" step="0.5" value="12"><span>m</span></div></div>
+    <div><label for="hgt">Tinggi pagar</label><div class="unit"><input id="hgt" type="number" min="0.8" max="3" step="0.1" value="1.8"><span>m</span></div></div>
+   </div>
+   <div class="row">
+    <div><label for="gate">Jenis gerbang</label><select id="gate"></select></div>
+    <div><label for="gw">Lebar gerbang</label><div class="unit"><input id="gw" type="number" min="1" step="0.5" value="3.5"><span>m</span></div></div>
+   </div>
+   
+   <div id="gw2box" hidden><label for="gw2">Lebar pintu swing (pintu kecil)</label><div class="unit"><input id="gw2" type="number" min="0.8" step="0.1" value="1"><span>m</span></div></div>
+   <div class="row">
+    <div><label for="nm">Nama Anda</label><input id="nm" type="text" autocomplete="name" placeholder="Contoh: Budi"></div>
+    <div><label for="city">Kota / lokasi pemasangan</label><input id="city" type="text" autocomplete="address-level2" placeholder="Contoh: Malang"></div>
+   </div>
+   <button id="go" type="button">Hitung estimasi</button>
+  </section>
+
+  <section class="card res" aria-live="polite" aria-labelledby="t2">
+   <h2 id="t2">Hasil estimasi</h2>
+   <div id="out"><p class="empty">Isi data di sebelah, lalu tekan “Hitung estimasi”.</p></div>
+   <a class="cta" id="waCta" href="#" target="_blank" rel="noopener" hidden>Kirim hasil ke WhatsApp</a>
+   <p class="note" id="lead" hidden>Isi nama dan kota lokasi pemasangan dulu, lalu tekan tombol WhatsApp lagi.</p>
+  </section>
+ </div>
+<section class="card" style="margin-top:24px" aria-labelledby="t3">
+  <h2 id="t3">Perbandingan ukuran rangka</h2>
+  <p class="sub">Penampang besi hollow dalam skala sebenarnya, dibandingkan dengan kisi 2×4. Harga per m² mengikuti jarak rong yang Anda pilih.</p>
+  <svg id="xsec" viewBox="0 0 600 165" style="width:100%;height:auto;max-height:200px" role="img" aria-label="Penampang rangka hollow"></svg>
+ </section>
+</main>
+
+<footer><div class="wrap">© 2026 DJ3 Engineering · Estimasi bersifat perkiraan. Harga final ditentukan setelah survei lokasi.</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ====== UBAH DI SINI: nomor WhatsApp & harga ====== */
+const WA = "6281234567890"; // ganti dengan nomor WhatsApp DJ3 Engineering (format 62...)
+const SPACING = [{n:"3 cm (rapat)"},{n:"5 cm"},{n:"8 cm (renggang)"}];
+const FRAME = [ // harga per m² (Rp), urutan: rong 3 cm, 5 cm, 8 cm
+ {n:"Rangka 4×4", p:[906463,753602,570170]},
+ {n:"Rangka 5×5", p:[956463,803602,620170]},
+ {n:"Rangka 4×6", p:[1031463,878602,695170]},
+ {n:"Rangka 4×8", p:[1131463,978602,795170]},
+ {n:"Rangka 5×10", p:[1281463,1128602,945170]}
+];
+const GATE = [ // biaya tambahan per jenis gerbang (Rp) + pengali harga bahan
+ {n:"Tanpa gerbang", add:0, k:0},
+ {n:"Gerbang swing (dorong)", add:700000, k:1.3},
+ {n:"Gerbang sliding (geser)", add:4000000, k:1.3},
+ {n:"Sliding + swing (pintu kecil)", add:4700000, k:1.3, w2:1}
+];
+
+const RANGE = 0.1; // ± 10%
+/* ================================================= */
+const $=id=>document.getElementById(id), rp=n=>"Rp"+Math.round(n/1000)*1000===0?"Rp0":"Rp"+(Math.round(n/1000)*1000).toLocaleString("id-ID");
+const fill=(el,a)=>el.innerHTML=a.map((o,i)=>`<option value="${i}">${o.n}</option>`).join("");
+fill($("mat"),FRAME);fill($("sp"),SPACING);fill($("gate"),GATE);
+
+let open=false,T=window.THREE,renderer,scene,camera,grp,az=.55,pol=1.28,dist=9,built=false,openT=0,openC=0,leaves=[],slide=null,slx=0,slw=0,tgt=null;
+function init(){
+ const cv=$("c3d");renderer=new T.WebGLRenderer({canvas:cv,antialias:true});
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;
+ scene=new T.Scene();scene.background=new T.Color(0xdde4e8);camera=new T.PerspectiveCamera(38,1,.1,100);tgt=new T.Vector3();
+ scene.add(new T.HemisphereLight(0xffffff,0x93a1ab,.85));
+ const d=new T.DirectionalLight(0xffffff,.8);d.position.set(5,9,7);d.castShadow=true;
+ Object.assign(d.shadow.camera,{left:-9,right:9,top:9,bottom:-9});d.shadow.mapSize.set(1024,1024);scene.add(d);
+ const gr=new T.Mesh(new T.PlaneGeometry(60,60),new T.MeshStandardMaterial({color:0xc4ccd2,roughness:1}));gr.rotation.x=-Math.PI/2;gr.receiveShadow=true;scene.add(gr);
+ grp=new T.Group();scene.add(grp);
+ let dr=null;
+ cv.addEventListener("pointerdown",e=>{dr=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId)});
+ cv.addEventListener("pointermove",e=>{if(!dr)return;az-=(e.clientX-dr[0])*.008;pol=Math.max(.35,Math.min(1.5,pol-(e.clientY-dr[1])*.006));dr=[e.clientX,e.clientY]});
+ cv.addEventListener("pointerup",()=>dr=null);
+ cv.addEventListener("wheel",e=>{e.preventDefault();dist=Math.max(1.5,Math.min(25,dist*(1+e.deltaY*.001)))},{passive:false});
+ const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ (function loop(){requestAnimationFrame(loop);
+  const w=cv.clientWidth,h=cv.clientHeight;
+  if(cv._w!==w||cv._h!==h){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();cv._w=w;cv._h=h}
+  openC+=(openT-openC)*(rm?1:.07);if(Math.abs(openT-openC)<.002)openC=openT;
+  leaves.forEach(l=>l[0].rotation.y=l[1]*openC*1.75);
+  if(slide)slide.position.x=slx-openC*slw;
+  camera.position.set(tgt.x+dist*Math.sin(pol)*Math.sin(az),tgt.y+dist*Math.cos(pol),tgt.z+dist*Math.sin(pol)*Math.cos(az));
+  camera.lookAt(tgt);renderer.render(scene,camera)})();
+}
+function draw(){
+ const g=GATE[$("gate").value];
+ $("tog").hidden=!g.k;if(!g.k)open=false;$("tog").textContent=open?"Tutup gerbang":"Buka gerbang";openT=open?1:0;
+ if(!T||!renderer)return;
+ while(grp.children.length)grp.remove(grp.children[0]);leaves=[];slide=null;
+ const L=Math.max(1,+$("len").value||1),H=Math.max(.8,Math.min(3,+$("hgt").value||1.8)),sp=+$("sp").value||0;
+ const GW=g.k?Math.max(1,+$("gw").value||1):0;
+ const [a,b]=FRAME[$("mat").value].n.match(/\d+/g).map(Number),A=a/100,B=b/100,gap=[.03,.05,.08][sp],K=.02,KD=.04;
+ const W2=g.w2?Math.max(.8,+$("gw2").value||1):0,show=Math.min(L,4),total=show+GW+W2,x0=-total/2;
+ const mF=new T.MeshStandardMaterial({color:0x1f262c,roughness:.45,metalness:.35}),mB=new T.MeshStandardMaterial({color:0x3b464f,roughness:.5,metalness:.3}),mH=new T.MeshStandardMaterial({color:0xd5dade,roughness:.25,metalness:.85});
+ const box=(w,h,d,x,y,z,m,par)=>{const o=new T.Mesh(new T.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;par.add(o)};
+ const panel=(w,mid,par,ox)=>{
+  box(A,H,B,ox+A/2,H/2,0,mF,par);box(A,H,B,ox+w-A/2,H/2,0,mF,par);
+  if(mid){const k=Math.max(1,Math.ceil(w/2.5));for(let i=1;i<k;i++)box(A,H,B,ox+i*w/k,H/2,0,mF,par)}
+  const iw=w-2*A,y0=.12+A,y1=H-A-.02,bh=y1-y0;
+  box(iw,A,B,ox+w/2,H-A/2-.02,0,mF,par);box(iw,A,B,ox+w/2,.12+A/2,0,mF,par);
+  const n=Math.max(1,Math.floor((iw+gap)/(K+gap))),im=new T.InstancedMesh(new T.BoxGeometry(K,bh,KD),mB,n),mx=new T.Matrix4(),span=n*K+(n-1)*gap,s0=ox+w/2-span/2+K/2;
+  for(let i=0;i<n;i++){mx.setPosition(s0+i*(K+gap),y0+bh/2,0);im.setMatrixAt(i,mx)}
+  im.castShadow=true;par.add(im)};
+ panel(show,true,grp,x0);
+ const gx=x0+show,gv=+$("gate").value,hy=Math.min(1,H*.55);
+ const handle=(par,x)=>[1,-1].forEach(s=>{box(.03,.45,.03,x,hy,s*(B/2+.05),mH,par);[.17,-.17].forEach(dy=>box(.02,.02,.05,x,hy+dy,s*(B/2+.025),mH,par))});
+ const cyl=(r,h,x,y,z,ax,par)=>{const o=new T.Mesh(new T.CylinderGeometry(r,r,h,14),mH);o.position.set(x,y,z);if(ax=="z")o.rotation.x=Math.PI/2;o.castShadow=true;par.add(o)};
+ const swing=(lg,rg)=>{
+  const xp=GW/2-.02-A/2,xr=-A/2;
+  [1,-1].forEach(s=>{const zf=s*B/2;
+   box(.045,.26,.008,xp,hy,zf+s*.004,mH,lg);
+   cyl(.009,.05,xp,hy+.04,zf+s*.03,"z",lg);
+   box(.13,.022,.022,xp-.05,hy+.04,zf+s*.055,mH,lg);
+   cyl(.013,.03,xp,hy-.07,zf+s*.015,"z",lg);
+   box(.04,.14,.008,xr,hy,zf+s*.004,mH,rg)});
+  [lg,rg].forEach(p=>[.3,H/2,H-.3].forEach(y=>cyl(.02,.09,0,y,0,"y",p)));
+  const zb=-(B/2+.02);
+  cyl(.008,.34,xr,.22,zb,"y",rg);box(.03,.03,.03,xr,.1,zb+.005,mH,rg);box(.03,.03,.03,xr,.32,zb+.005,mH,rg);box(.045,.012,.025,xr-.02,.27,zb-.02,mH,rg)};
+ if(gv==1){const lg=new T.Group(),rg=new T.Group();lg.position.x=gx+.02;rg.position.x=x0+total;grp.add(lg,rg);panel(GW/2-.02,false,lg,0);panel(GW/2-.02,false,rg,-GW/2+.02);swing(lg,rg);leaves=[[lg,1],[rg,-1]]}
+ if(gv>=2){const zs=.09,sg=new T.Group();sg.position.set(gx,0,zs);grp.add(sg);panel(GW,false,sg,0);handle(sg,A+.06);box(2*GW,.04,.06,gx,.02,zs,mB,grp);slide=sg;slx=gx;slw=GW}
+ if(gv==3){const dg=new T.Group();dg.position.x=x0+total;grp.add(dg);panel(W2-.02,false,dg,-W2+.02);const xp=-W2+.02+A/2;
+  [1,-1].forEach(s=>{const zf=s*B/2;box(.045,.26,.008,xp,hy,zf+s*.004,mH,dg);cyl(.009,.05,xp,hy+.04,zf+s*.03,"z",dg);box(.13,.022,.022,xp+.05,hy+.04,zf+s*.055,mH,dg);cyl(.013,.03,xp,hy-.07,zf+s*.015,"z",dg)});
+  [.3,H/2,H-.3].forEach(y=>cyl(.02,.09,0,y,0,"y",dg));leaves=[[dg,-1]]}
+ tgt.set(0,H/2,0);if(!built){dist=Math.max(5,total*1.15+H);built=true}
+}
+function drawX(){const sel=+$("mat").value,sp=+$("sp").value;let s="";
+ FRAME.forEach((f,i)=>{const[a,b]=f.n.match(/\d+/g).map(Number),cx=70+i*100,w=a*10,hh=b*10;
+  s+=`<rect class="sx${i==sel?" on":""}" x="${cx-w/2}" y="${125-hh}" width="${w}" height="${hh}" rx="3"/><text class="tx" x="${cx}" y="143" text-anchor="middle" font-weight="${i==sel?700:400}">${a}×${b} cm</text><text class="tx m" x="${cx}" y="158" text-anchor="middle">Rp${f.p[sp].toLocaleString("id-ID")}/m²</text>`});
+ s+=`<rect class="sx k" x="550" y="85" width="20" height="40" rx="2"/><text class="tx" x="560" y="143" text-anchor="middle">Kisi 2×4</text>`;
+ $("xsec").innerHTML=s}
+let last="";
+function calc(){
+ const L=+$("len").value,H=+$("hgt").value,GW=+$("gw").value;
+ const m=FRAME[$("mat").value],sp=+$("sp").value,g=GATE[$("gate").value];
+ if(!(L>0)||!(H>0)||(g.k&&!(GW>0))||(g.w2&&!(+$("gw2").value>0))){$("out").innerHTML='<p class="empty">Panjang, tinggi, dan lebar gerbang harus lebih dari 0.</p>';$("waCta").hidden=true;return}
+ const rate=m.p[sp], fenceCost=L*H*rate, gateCost=g.k?(GW+(g.w2?+$("gw2").value:0))*H*rate*g.k+g.add:0, total=fenceCost+gateCost;
+ const lo=total*(1-RANGE),hi=total*(1+RANGE);
+ const R=n=>"Rp"+(Math.round(n/10000)*10000).toLocaleString("id-ID");
+ let li=`<li><span>Pagar ${L} m × ${H} m (${(L*H).toFixed(1)} m²)</span><b>${R(fenceCost)}</b></li>`;
+ if(g.k)li+=`<li><span>${g.n} ${GW} m${g.w2?" + pintu "+$("gw2").value+" m":""}</span><b>${R(gateCost)}</b></li>`;
+ li+=`<li><span>${m.n}</span><span>Rong ${SPACING[sp].n}</span></li>`;
+ $("out").innerHTML=`<div class="note">Perkiraan biaya total</div><div class="total">${R(lo)} – ${R(hi)}</div><ul>${li}</ul><p class="note">Rentang ±${RANGE*100}% dari ${R(total)}. Harga final menyesuaikan kondisi lokasi, desain, dan ketebalan bahan.</p>`;
+ last=`- Rangka hollow: ${m.n}, rong ${SPACING[sp].n}\n- Ukuran: ${L} m × ${H} m\n- Gerbang: ${g.n}${g.k?" "+GW+" m":""}${g.w2?" + pintu swing "+$("gw2").value+" m":""}\n- Estimasi: ${R(lo)} – ${R(hi)}`;
+ $("waCta").hidden=false;
+}
+$("waTop").href=`https://wa.me/${WA}?text=${encodeURIComponent("Halo DJ3 Engineering, saya ingin konsultasi pembuatan pagar minimalis.")}`;
+$("go").addEventListener("click",calc);
+$("waCta").addEventListener("click",e=>{const nm=$("nm").value.trim(),ct=$("city").value.trim();
+ if(!nm||!ct){e.preventDefault();$("lead").hidden=false;(!nm?$("nm"):$("city")).focus();return}
+ $("lead").hidden=true;
+ const msg=`Halo DJ3 Engineering, saya ${nm} dari ${ct}. Saya sudah menghitung estimasi pagar minimalis:\n${last}\nSaya ingin konsultasi lebih lanjut.`;
+ $("waCta").href=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`});
+["len","hgt","sp","mat","gw","gw2"].forEach(i=>$(i).addEventListener("input",()=>{draw();drawX()}));
+$("tog").addEventListener("click",()=>{open=!open;$("tog").textContent=open?"Tutup gerbang":"Buka gerbang";openT=open?1:0});
+$("gate").addEventListener("change",()=>{$("gw").disabled=!GATE[$("gate").value].k;const c2=GATE[$("gate").value].w2;$("gw2box").hidden=!c2;document.querySelector('label[for=gw]').textContent=c2?"Lebar gerbang sliding":"Lebar gerbang";open=false;draw()});
+if(T){try{init()}catch(e){T=null;renderer=null}}if(!T||!renderer){$("c3d").style.display="none";$("nogl").hidden=false}
+$("gw").disabled=true;draw();drawX();
+</script>
+</body>
+</html>
